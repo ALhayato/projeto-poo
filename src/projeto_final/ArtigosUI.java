@@ -8,9 +8,9 @@ public class ArtigosUI {
 	private GerenciaArtigos gerencia;
 	
 	private void printMenu() {
-		System.out.println("Gerencia coleção de Artigos\n"
-					+ "1 - Listar artigos da coleção\n"
-					+ "2 - Adicionar artigo à coleção\n"
+		System.out.println("Gerencia coleÃ§Ã£o de Artigos\n"
+					+ "1 - Listar artigos da coleÃ§Ã£o\n"
+					+ "2 - Adicionar artigo Ã  coleÃ§Ã£o\n"
 					+ "3 - Editar um artigo\n"
 					+ "4 - Remover um artigo\n"
 					+ "5 - Buscar artigos");
@@ -29,7 +29,7 @@ public class ArtigosUI {
 		int numeroLido = 0;
 		
 		System.out.println( mensagem );
-		//Lendo inteiros do teclado. Vamos utilizar para ler a opcao, ler a placa e o valor do veiculo;
+		//Lendo inteiros do teclado. Vamos utilizar para ler a opcao desejada;
 		Scanner scanner = new Scanner( System.in );
 		numeroLido = scanner.nextInt();
 		
@@ -51,10 +51,10 @@ public class ArtigosUI {
 	private void lerArtigo() {
 		System.out.println("Adicionando um artigo");
 		String nome = lerString("Digite o nome do artigo: ");
-		String evento = lerString("Digite o evento de publicação: ");
-		String local = lerString("Digite o local de publicação (país): ");
+		String evento = lerString("Digite o evento de publicaÃ§Ã£o: ");
+		String local = lerString("Digite o local de publicaÃ§Ã£o (paÃ­s): ");
 		String autor = lerString("Digite o autor do artigo: ");
-		String data = lerString("Digite a data de publicação no formato dd/mm/aaaa: ");
+		String data = lerString("Digite a data de publicaÃ§Ã£o no formato dd/mm/aaaa: ");
 		Artigo a = new Artigo(nome, evento, local, autor, data);
 		gerencia.adicionarArtigo(a);	
 	}
@@ -72,6 +72,22 @@ public class ArtigosUI {
 	private void buscarArtigo() {
 		String nomeArtigo = lerString("Digite o que procura: ");
 		String[] chaves = nomeArtigo.split(" ");
+		int flag = 0;
+		for (String x : chaves) {
+			if (gerencia.getArtigo(x) != null) {
+				gerencia.getArtigo(x).exibirDados();
+				flag = 1;
+				break;
+			}
+		}
+		if (flag == 0) {
+			System.out.println("Nenhum artigo encontrado!");
+		}
+	}
+	
+	private void buscarLocalArtigo() {
+		String localDePublicacaoArtigo = lerString("Digite o que procura: ");
+		String[] chaves = localDePublicacaoArtigo.split(" ");
 		int flag = 0;
 		for (String x : chaves) {
 			if (gerencia.getArtigo(x) != null) {
